@@ -33,7 +33,7 @@ public class NoticeboardDAO {
 			ResultSet rs = con.pstmt(sql).executeQuery();
 			ArrayList<Noticeboard> nbs = new ArrayList<Noticeboard>();
 			while(rs.next()) {
-				nbs.add(new Noticeboard(Integer.parseInt(rs.getString(1)),rs.getString(2),rs.getString(3),rs.getString(4),new SimpleDateFormat("YYYY/MM/dd a hh:mm:ss").format(rs.getDate(5).getTime()),rs.getString(7)));
+				nbs.add(new Noticeboard(Integer.parseInt(rs.getString(1)),rs.getString(2),rs.getString(3),rs.getString(4),rs.getTimestamp(5),rs.getString(7)));
 			}
 			rs.close();
 			con.close();
@@ -52,7 +52,7 @@ public class NoticeboardDAO {
 			ResultSet rs = con.pstmt(sql).executeQuery();
 			if(rs.next()==false) 
 				return null;
-			Noticeboard esc = new Noticeboard(Integer.parseInt(rs.getString(1)),rs.getString(2),rs.getString(3),rs.getString(4),new SimpleDateFormat("YYYY/MM/dd a hh:mm:ss").format(rs.getDate(5).getTime()),rs.getString(7));
+			Noticeboard esc = new Noticeboard(Integer.parseInt(rs.getString(1)),rs.getString(2),rs.getString(3),rs.getString(4),rs.getTimestamp(5),rs.getString(7));
 			rs.close();
 			con.close();
 			return esc;
@@ -88,6 +88,20 @@ public class NoticeboardDAO {
 			e.printStackTrace();
 			con.close();
 			return null;
+		}
+	}
+	public boolean deleteContentAD(String deleteKey) {
+		Connect con = new Connect();
+		String sql = "delete from noticeboard where mb_title like '%"+deleteKey+"%' or client_id like '%"+deleteKey+"%'";
+		try {
+			con.pstmt(sql).executeUpdate();
+			con.pstmt(sql).close();
+			con.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			con.close();
+			return false;
 		}
 	}
 }

@@ -30,4 +30,7 @@ public class Controller {
 	public Client deleteSign(Client cli) {
 		return new ClientDAO().deleteSign(cli);
 	}
+	public boolean deleteNBAd(String deleteKey) {
+		return new NoticeboardDAO().deleteContentAD(deleteKey);
+	}
 }

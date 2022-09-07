@@ -1,14 +1,15 @@
 package console_CRUD;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Noticeboard {
 	private String title, content, ID;
 	private int no;
-	private String writeDate;
+	private Timestamp writeDate;
 	private String ename;
-	Noticeboard(int no, String title, String content, String ID, String writeDate, String ename){
+	Noticeboard(int no, String title, String content, String ID, Timestamp writeDate, String ename){
 		this.no=no;
 		this.title=title;
 		this.content=content;
@@ -16,7 +17,7 @@ public class Noticeboard {
 		this.writeDate=writeDate;
 		this.ename=ename;
 	}
-	Noticeboard(int no, String title, String content, String ID, String writeDate){
+	Noticeboard(int no, String title, String content, String ID, Timestamp writeDate){
 		this.no=no;
 		this.title=title;
 		this.content=content;
@@ -28,8 +29,7 @@ public class Noticeboard {
 		this.title=title;
 		this.content=content;
 		this.ID=ID;
-		SimpleDateFormat sdf=new SimpleDateFormat("YYYY/MM/DD");
-		this.writeDate=sdf.format(new Date().getTime());
+		this.writeDate=new Timestamp(System.currentTimeMillis());
 	}
 	Noticeboard(String title, String content,String ID){
 		this.title=title;
@@ -60,10 +60,10 @@ public class Noticeboard {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getWriteDate() {
+	public Timestamp getWriteDate() {
 		return writeDate;
 	}
-	public void setWriteDate(String writeDate) {
+	public void setWriteDate(Timestamp writeDate) {
 		this.writeDate = writeDate;
 	}
 	public String getEname() {
@@ -71,5 +71,15 @@ public class Noticeboard {
 	}
 	public void setEname(String ename) {
 		this.ename = ename;
+	}
+	public String getTimeFormat() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd a hh:mm:ss");
+		String time = sdf.format(writeDate);
+		return time;
+	}
+	public boolean getNewChars() {
+		if(((System.currentTimeMillis()-this.writeDate.getTime())/1000)<86400)
+			return true;
+		return false;
 	}
 }

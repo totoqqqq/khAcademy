@@ -53,13 +53,13 @@ public class Run {
 							else {
 								if(searchKey.equals("")) {
 									for(Noticeboard nb:nbs) {
-										System.out.printf("%s\t | %s\t | %s\t | %s\n",nb.getNo(),nb.getTitle(),(nb.getEname()==null?"탈퇴한 회원":nb.getEname()),nb.getWriteDate());
+										System.out.printf("%s\t | %s\t | %s\t | %s\n",(nb.getNewChars()?nb.getNo()+"☆new":nb.getNo()),nb.getTitle(),(nb.getEname()==null?"탈퇴한 회원":nb.getEname()),nb.getTimeFormat());
 									}
 								}else {
 									for(Iterator<Noticeboard> nb=nbs.iterator();nb.hasNext();) {
 										Noticeboard keyWord = nb.next();
-										if(keyWord.getTitle().contains(searchKey)||keyWord.getEname().contains(searchKey))
-											System.out.printf("%s\t | %s\t | %s\t | %s\n",keyWord.getNo(),keyWord.getTitle(),(keyWord.getEname()==null?"탈퇴한 회원":keyWord.getEname()),keyWord.getWriteDate());
+										if(keyWord.getTitle().contains(searchKey)||(keyWord.getEname().contains(searchKey)))
+											System.out.printf("%s\t | %s\t | %s\t | %s\n",(keyWord.getNewChars()?keyWord.getNo()+"☆new":keyWord.getNo()),keyWord.getTitle(),(keyWord.getEname()==null?"탈퇴한 회원":keyWord.getEname()),keyWord.getTimeFormat());
 										else
 											nb.remove();
 									}
@@ -92,7 +92,7 @@ public class Run {
 							else {
 								for(Noticeboard nb:nbsu) {
 									if(nb.getID().equals(clientLogin.getID()))
-									System.out.printf("%s\t | %s\t | %s\t | %s\n",nb.getNo(),nb.getTitle(),nb.getEname(),nb.getWriteDate());
+									System.out.printf("%s\t | %s\t | %s\t | %s\n",(nb.getNewChars()?nb.getNo()+"☆new":nb.getNo()),nb.getTitle(),nb.getEname(),nb.getTimeFormat());
 								}
 								System.out.println("수정할 게시글 번호를 입력해주세요. 없는 번호 입력시 메뉴로");
 								int selectNo=0;
@@ -124,7 +124,7 @@ public class Run {
 							else {
 								for(Noticeboard nb:nbsd) {
 									if(nb.getID().equals(clientLogin.getID()))
-									System.out.printf("%s\t | %s\t | %s\t | %s\n",nb.getNo(),nb.getTitle(),nb.getEname(),nb.getWriteDate());
+									System.out.printf("%s\t | %s\t | %s\t | %s\n",(nb.getNewChars()?nb.getNo()+"☆new":nb.getNo()),nb.getTitle(),nb.getEname(),nb.getTimeFormat());
 								}
 								System.out.println("삭제할 게시글 번호를 입력해주세요. 없는 번호 입력시 메뉴로");
 								int selectNo=0;
@@ -179,15 +179,25 @@ public class Run {
 								break BBS;
 							case "N":
 							default:
+								System.out.println(clientLogin.getNickname()+"회원 탈퇴 취소 되었습니다.");
 								break;
 							}
 							break;
 						case "101":
 							if(clientLogin.getLevels()==10) {
+								String deleteKey;
+								System.out.println("삭제할 게시글 KeyWord(글 제목,ID)를 입력해주세요. 미입력시 전체 삭제");
+								deleteKey=scan.nextLine();
+								boolean checkDeAdmin=new Controller().deleteNBAd(deleteKey);
+								if(checkDeAdmin)
+									System.out.println(deleteKey+"가 포함된 게시물들이 일괄 삭제 되었습니다.");
+								else
+									System.out.println("삭제 오류가 발생되었습니다.");
 								break;
 							}
 						case "102":
 							if(clientLogin.getLevels()==10) {
+								System.out.println("내일 구현 할래");
 								break;
 							}
 						default:

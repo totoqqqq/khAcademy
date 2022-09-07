@@ -69,6 +69,8 @@ public class ClientDAO {
 		String sql="delete from clientinfo where client_id='"+cli.getID()+"' and levels='"+cli.getLevels()+"'";
 		try {
 			con.pstmt(sql).executeUpdate();
+			sql="delete from noticeboard where client_id='"+cli.getID()+"'";
+			con.pstmt(sql).executeUpdate();
 			con.pstmt(sql).close();
 			con.close();
 			return cli;
