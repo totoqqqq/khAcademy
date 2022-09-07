@@ -2,7 +2,6 @@ package console_CRUD;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Noticeboard {
 	private String title, content, ID;
