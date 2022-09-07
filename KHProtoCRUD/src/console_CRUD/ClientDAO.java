@@ -40,10 +40,27 @@ public class ClientDAO {
 			signupPs.setString(4, Integer.toString(cli.getPhone()));
 			signupPs.setString(5, Integer.toString(cli.getLevels()));
 			signupPs.executeQuery();
+			signupPs.close();
+			con.close();
 			return cli;
 		} catch (SQLException e) {
 			System.out.println("회원 가입실패");
 			e.printStackTrace();
+			con.close();
+			return null;
+		}
+	}
+	public Client updateSign(Client cli) {
+		Connect con = new Connect();
+		String sql="update clientinfo set client_pw='"+cli.getPW()+"', client_ename='"+cli.getNickname()+"', client_phone='"+cli.getPhone()+"' where client_id='"+cli.getID()+"' and levels='"+cli.getLevels()+"'";
+		try {
+			con.pstmt(sql).executeUpdate();
+			con.pstmt(sql).close();
+			con.close();
+			return cli;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			con.close();
 			return null;
 		}
 	}

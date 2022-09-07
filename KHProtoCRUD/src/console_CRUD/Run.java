@@ -157,7 +157,18 @@ public class Run {
 							if(upEname.equals(""))
 								upEname=clientLogin.getNickname();
 							System.out.println("수정 할 전화번호를 작성해주세요.");
-							
+							try {
+							upPhone = Integer.parseInt(scan.nextLine());
+							}catch(NumberFormatException e) {
+								upPhone=clientLogin.getPhone();
+							}
+							Client check=new Controller().updateSign(new Client(clientLogin.getID(),upPW,upEname,upPhone,clientLogin.getLevels()));
+							if(!(check==null)) {
+								System.out.println(check.getNickname()+"님 정보가 변경 되었습니다.");
+								break BBS;
+							}
+							else
+								System.out.println(clientLogin.getNickname()+"님 정보가 변경 실패 하였습니다.(휴대전화 확인 부탁드립니다.)");
 							break;
 						case "6":
 							break;

@@ -24,4 +24,7 @@ public class Controller {
 	public Noticeboard deleteNB(Noticeboard nb) {
 		return new NoticeboardDAO().deleteContent(nb);
 	}
+	public Client updateSign(Client cli) {
+		return new ClientDAO().updateSign(cli);
+	}
 }
