@@ -12,6 +12,7 @@ public class Connect implements AutoCloseable{
 	private final String ID="commu", PW="commu";
 	private final String DBURL="jdbc:oracle:thin:@localhost:1521:xe",DBdriver="oracle.jdbc.driver.OracleDriver";
 	private Connection con;
+	private PreparedStatement ps;
 	private OracleConnectionPoolDataSource ocpds;
 	Connect(){
 		try {
@@ -28,7 +29,8 @@ public class Connect implements AutoCloseable{
 		}
 	}
 	PreparedStatement pstmt(String sql) {
-		try(PreparedStatement ps=this.con.prepareCall(sql)) {
+		try {
+			ps=this.con.prepareCall(sql);
 			return ps;
 		} catch (SQLException e) {
 			System.out.println("sql 구문 오류");
@@ -38,6 +40,7 @@ public class Connect implements AutoCloseable{
 	}
 	@Override
 	public void close() throws Exception {
+		this.ps.close();
 		this.con.close();	
 	}
 }
