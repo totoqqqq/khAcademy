@@ -8,7 +8,7 @@ import javax.sql.PooledConnection;
 
 import oracle.jdbc.pool.OracleConnectionPoolDataSource;
 
-public class Connect {
+public class Connect implements AutoCloseable{
 	private final String ID="commu", PW="commu";
 	private final String DBURL="jdbc:oracle:thin:@localhost:1521:xe",DBdriver="oracle.jdbc.driver.OracleDriver";
 	private Connection con;
@@ -36,12 +36,8 @@ public class Connect {
 			return null;
 		}
 	}
-	void close() {
-		try {
-			this.con.close();
-		} catch (SQLException e) {
-			System.out.println("풀 반환 오류");
-			e.printStackTrace();
-		}
+	@Override
+	public void close() throws Exception {
+		this.con.close();	
 	}
 }
