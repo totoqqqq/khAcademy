@@ -28,8 +28,8 @@ public class Connect implements AutoCloseable{
 		}
 	}
 	PreparedStatement pstmt(String sql) {
-		try {
-			return this.con.prepareCall(sql);
+		try(PreparedStatement ps=this.con.prepareCall(sql)) {
+			return ps;
 		} catch (SQLException e) {
 			System.out.println("sql 구문 오류");
 			e.printStackTrace();

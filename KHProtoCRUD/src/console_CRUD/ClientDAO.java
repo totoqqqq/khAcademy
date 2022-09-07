@@ -40,7 +40,6 @@ public class ClientDAO {
 		String sql="update clientinfo set client_pw='"+cli.getPW()+"', client_ename='"+cli.getNickname()+"', client_phone='"+cli.getPhone()+"' where client_id='"+cli.getID()+"' and levels='"+cli.getLevels()+"'";
 		try(Connect con = new Connect();) {
 			con.pstmt(sql).executeUpdate();
-			con.pstmt(sql).close();
 			return cli;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,7 +52,6 @@ public class ClientDAO {
 			con.pstmt(sql).executeUpdate();
 			sql="delete from noticeboard where client_id='"+cli.getID()+"'";
 			con.pstmt(sql).executeUpdate();
-			con.pstmt(sql).close();
 			return cli;
 		} catch (Exception e) {
 			e.printStackTrace();

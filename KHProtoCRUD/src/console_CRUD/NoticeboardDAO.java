@@ -50,7 +50,6 @@ public class NoticeboardDAO {
 		String sql = "update noticeboard set mb_title='"+nb.getTitle()+"', mb_content='"+nb.getContent()+"' where mb_no='"+nb.getNo()+"'";
 		try(Connect con = new Connect();) {
 			con.pstmt(sql).executeUpdate();
-			con.pstmt(sql).close();
 			return nb;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,7 +60,6 @@ public class NoticeboardDAO {
 		String sql = "delete from noticeboard where mb_no='"+nb.getNo()+"' and client_id='"+nb.getID()+"'";
 		try(Connect con = new Connect();) {
 			con.pstmt(sql).executeUpdate();
-			con.pstmt(sql).close();
 			return nb;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,7 +70,6 @@ public class NoticeboardDAO {
 		String sql = "delete from noticeboard where mb_title like '%"+deleteKey+"%' or client_id like '%"+deleteKey+"%'";
 		try(Connect con = new Connect();) {
 			con.pstmt(sql).executeUpdate();
-			con.pstmt(sql).close();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
