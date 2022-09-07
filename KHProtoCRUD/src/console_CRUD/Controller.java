@@ -27,4 +27,7 @@ public class Controller {
 	public Client updateSign(Client cli) {
 		return new ClientDAO().updateSign(cli);
 	}
+	public Client deleteSign(Client cli) {
+		return new ClientDAO().deleteSign(cli);
+	}
 }

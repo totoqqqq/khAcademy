@@ -64,4 +64,18 @@ public class ClientDAO {
 			return null;
 		}
 	}
+	public Client deleteSign(Client cli) {
+		Connect con = new Connect();
+		String sql="delete from clientinfo where client_id='"+cli.getID()+"' and levels='"+cli.getLevels()+"'";
+		try {
+			con.pstmt(sql).executeUpdate();
+			con.pstmt(sql).close();
+			con.close();
+			return cli;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			con.close();
+			return null;
+		}
+	}
 }

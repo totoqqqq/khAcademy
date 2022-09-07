@@ -29,7 +29,7 @@ public class Run {
 						String title,content;
 						System.out.println(clientLogin.getNickname()+"님 메뉴를 선택해주세요.\n1.새 글 작성 2.게시판 읽기 3.작성 글 수정 4. 작성 글 삭제 5. 본인 정보 수정 6. 회원 탈퇴 \n[메뉴 이외 선택하면 종료] ");
 						if(clientLogin.getLevels()==10)
-							System.out.println("[관리자 메누]\n101.회원 검색, 102. 회원 수정, 103. 회원 삭제");
+							System.out.println("[관리자 메누]\n101.게시글 삭제, 102. 회원 권한 수정/정지/해제");
 						switch(scan.nextLine()) {
 						case "1":
 							System.out.println("글 제목을 입력해주세요.");
@@ -53,13 +53,13 @@ public class Run {
 							else {
 								if(searchKey.equals("")) {
 									for(Noticeboard nb:nbs) {
-										System.out.printf("%s\t | %s\t | %s\t | %s\n",nb.getNo(),nb.getTitle(),nb.getEname(),nb.getWriteDate());
+										System.out.printf("%s\t | %s\t | %s\t | %s\n",nb.getNo(),nb.getTitle(),(nb.getEname()==null?"탈퇴한 회원":nb.getEname()),nb.getWriteDate());
 									}
 								}else {
 									for(Iterator<Noticeboard> nb=nbs.iterator();nb.hasNext();) {
 										Noticeboard keyWord = nb.next();
 										if(keyWord.getTitle().contains(searchKey)||keyWord.getEname().contains(searchKey))
-											System.out.printf("%s\t | %s\t | %s\t | %s\n",keyWord.getNo(),keyWord.getTitle(),keyWord.getEname(),keyWord.getWriteDate());
+											System.out.printf("%s\t | %s\t | %s\t | %s\n",keyWord.getNo(),keyWord.getTitle(),(keyWord.getEname()==null?"탈퇴한 회원":keyWord.getEname()),keyWord.getWriteDate());
 										else
 											nb.remove();
 									}
@@ -171,6 +171,16 @@ public class Run {
 								System.out.println(clientLogin.getNickname()+"님 정보가 변경 실패 하였습니다.(휴대전화 확인 부탁드립니다.)");
 							break;
 						case "6":
+							System.out.println("계정을 삭제하시겠습니까?(Y/N)-이외 선택시 N");
+							switch(scan.nextLine()) {
+							case "Y":
+								new Controller().deleteSign(clientLogin);
+								System.out.println(clientLogin.getNickname()+"님 그동안 감사했습니다. 회원 탈퇴 되었습니다.");
+								break BBS;
+							case "N":
+							default:
+								break;
+							}
 							break;
 						case "101":
 							if(clientLogin.getLevels()==10) {
@@ -179,10 +189,6 @@ public class Run {
 						case "102":
 							if(clientLogin.getLevels()==10) {
 								break;
-							}
-						case "103":
-							if(clientLogin.getLevels()==10) {
-								break;	
 							}
 						default:
 							System.out.println("BBS 연결을 종료 합니다.");
