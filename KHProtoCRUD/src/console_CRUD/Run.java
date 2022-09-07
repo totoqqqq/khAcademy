@@ -145,6 +145,19 @@ public class Run {
 							}
 							break;
 						case "5":
+							String upEname=null, upPW=null; 
+							int upPhone=0;
+							System.out.println("[개인정보 변경]-미입력시 이전정보 유지합니다.");
+							System.out.println("수정 할 암호를 작성해주세요.");
+							upPW=scan.nextLine();
+							if(upPW.equals(""))
+								upPW=clientLogin.getPW();
+							System.out.println("수정 할 닉네임을 작성해주세요.");
+							upEname=scan.nextLine();
+							if(upEname.equals(""))
+								upEname=clientLogin.getNickname();
+							System.out.println("수정 할 전화번호를 작성해주세요.");
+							
 							break;
 						case "6":
 							break;
