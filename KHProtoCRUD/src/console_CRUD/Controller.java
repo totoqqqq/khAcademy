@@ -8,7 +8,7 @@ public class Controller {
 	}
 	public static Controller getInstance() {
 		if(cont==null)
-			new Controller();
+			cont=new Controller();
 		return cont;
 	}
 	Client login(Client cli) {

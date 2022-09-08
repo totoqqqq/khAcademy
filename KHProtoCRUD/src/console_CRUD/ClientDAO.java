@@ -9,7 +9,7 @@ public class ClientDAO {
 	}
 	public static ClientDAO getInstance(){
 		if(cliDAO==null)
-			new ClientDAO();
+			cliDAO=new ClientDAO();
 		return cliDAO;
 	}
 	Client login(Client client) {

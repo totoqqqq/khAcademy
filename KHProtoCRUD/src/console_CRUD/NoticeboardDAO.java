@@ -10,7 +10,7 @@ public class NoticeboardDAO {
 	}
 	public static NoticeboardDAO getInstance(){
 		if(nbDAO==null)
-			new NoticeboardDAO();
+			nbDAO=new NoticeboardDAO();
 		return nbDAO;
 	}
 	Noticeboard createContent(Noticeboard nb) {
