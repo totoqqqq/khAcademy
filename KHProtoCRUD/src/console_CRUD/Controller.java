@@ -4,33 +4,43 @@ import java.util.ArrayList;
 
 public class Controller {
 	Client login(Client cli) {
-		return new ClientDAO().login(cli);
+		ClientDAO cliDAO = ClientDAO.getInstance();
+		return cliDAO.login(cli);
 	}
 	Client signup(Client cli) {
-		return new ClientDAO().signup(cli);
+		ClientDAO cliDAO = ClientDAO.getInstance();
+		return cliDAO.signup(cli);
 	}
 	Noticeboard createContent(Noticeboard nb) {
-		return new NoticeboardDAO().createContent(nb);
+		NoticeboardDAO nbDAO=NoticeboardDAO.getInstance();
+		return nbDAO.createContent(nb);
 	}
 	ArrayList<Noticeboard> readContent() {
-		return new NoticeboardDAO().readContent();
+		NoticeboardDAO nbDAO=NoticeboardDAO.getInstance();
+		return nbDAO.readContent();
 	}
 	Noticeboard editSearchContent(int i,Client clientLogin) {
-		return new NoticeboardDAO().editSearchContent(i,clientLogin);
+		NoticeboardDAO nbDAO=NoticeboardDAO.getInstance();
+		return nbDAO.editSearchContent(i,clientLogin);
 	}
 	public Noticeboard updateNB(Noticeboard nb) {
-		return new NoticeboardDAO().updateContent(nb);
+		NoticeboardDAO nbDAO=NoticeboardDAO.getInstance();
+		return nbDAO.updateContent(nb);
 	}
 	public Noticeboard deleteNB(Noticeboard nb) {
-		return new NoticeboardDAO().deleteContent(nb);
+		NoticeboardDAO nbDAO=NoticeboardDAO.getInstance();
+		return nbDAO.deleteContent(nb);
 	}
 	public Client updateSign(Client cli) {
-		return new ClientDAO().updateSign(cli);
+		ClientDAO cliDAO = ClientDAO.getInstance();
+		return cliDAO.updateSign(cli);
 	}
 	public Client deleteSign(Client cli) {
-		return new ClientDAO().deleteSign(cli);
+		ClientDAO cliDAO = ClientDAO.getInstance();
+		return cliDAO.deleteSign(cli);
 	}
 	public boolean deleteNBAd(String deleteKey) {
-		return new NoticeboardDAO().deleteContentAD(deleteKey);
+		NoticeboardDAO nbDAO=NoticeboardDAO.getInstance();
+		return nbDAO.deleteContentAD(deleteKey);
 	}
 }

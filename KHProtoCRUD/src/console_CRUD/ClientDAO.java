@@ -4,6 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class ClientDAO {
+	private static ClientDAO cliDAO = new ClientDAO();
+	private ClientDAO(){
+	}
+	public static ClientDAO getInstance(){
+		return cliDAO;
+	}
 	Client login(Client client) {
 		String sql="select * from clientinfo where client_id='"+client.getID()+"' and client_pw='"+client.getPW()+"'";
 		try(Connect con=new Connect();ResultSet rs=con.pstmt(sql).executeQuery();) {

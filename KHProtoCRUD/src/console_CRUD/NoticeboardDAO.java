@@ -5,6 +5,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class NoticeboardDAO {
+	private static NoticeboardDAO nbDAO = new NoticeboardDAO();
+	private NoticeboardDAO(){
+	}
+	public static NoticeboardDAO getInstance(){
+		return nbDAO;
+	}
 	Noticeboard createContent(Noticeboard nb) {
 		String sql="insert into noticeboard values(NOTICEBOARD_NO.nextval,?,?,?,sysdate)";
 		try(Connect con = new Connect();PreparedStatement conNb = con.pstmt(sql);) {
