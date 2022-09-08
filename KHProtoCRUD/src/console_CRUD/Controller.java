@@ -3,10 +3,12 @@ package console_CRUD;
 import java.util.ArrayList;
 
 public class Controller {
-	private static Controller cont=new Controller();
+	private static Controller cont=null;
 	private Controller() {	
 	}
 	public static Controller getInstance() {
+		if(cont==null)
+			new Controller();
 		return cont;
 	}
 	Client login(Client cli) {

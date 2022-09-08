@@ -4,10 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class ClientDAO {
-	private static ClientDAO cliDAO = new ClientDAO();
+	private static ClientDAO cliDAO=null;
 	private ClientDAO(){
 	}
 	public static ClientDAO getInstance(){
+		if(cliDAO==null)
+			new ClientDAO();
 		return cliDAO;
 	}
 	Client login(Client client) {

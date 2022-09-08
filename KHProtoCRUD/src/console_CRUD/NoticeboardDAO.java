@@ -5,10 +5,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class NoticeboardDAO {
-	private static NoticeboardDAO nbDAO = new NoticeboardDAO();
+	private static NoticeboardDAO nbDAO = null;
 	private NoticeboardDAO(){
 	}
 	public static NoticeboardDAO getInstance(){
+		if(nbDAO==null)
+			new NoticeboardDAO();
 		return nbDAO;
 	}
 	Noticeboard createContent(Noticeboard nb) {
