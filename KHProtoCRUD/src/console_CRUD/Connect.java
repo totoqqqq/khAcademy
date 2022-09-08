@@ -4,26 +4,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.sql.PooledConnection;
-
-import oracle.jdbc.pool.OracleConnectionPoolDataSource;
+import oracle.ucp.jdbc.PoolDataSource;
+import oracle.ucp.jdbc.PoolDataSourceFactory;
 
 public class Connect implements AutoCloseable{
 	private final String ID="commu", PW="commu";
 	private final String DBURL="jdbc:oracle:thin:@localhost:1521:xe",DBdriver="oracle.jdbc.driver.OracleDriver";
 	private Connection con;
 	private PreparedStatement ps;
-	private OracleConnectionPoolDataSource ocpds;
 	Connect(){
-		try {
-			Class.forName(DBdriver);
-			this.ocpds=new OracleConnectionPoolDataSource();
-			ocpds.setURL(DBURL);
-			ocpds.setUser(ID);
-			ocpds.setPassword(PW);
-			PooledConnection pc = ocpds.getPooledConnection();
-			this.con=pc.getConnection();
-		} catch (ClassNotFoundException | SQLException e) {
+		try {//ups로 교체.
+			PoolDataSource pds=PoolDataSourceFactory.getPoolDataSource();
+			pds.setConnectionFactoryClassName(DBdriver);
+			pds.setURL(DBURL);
+			pds.setUser(ID);
+			pds.setPassword(PW);
+			pds.setInitialPoolSize(10);
+			pds.setMinPoolSize(10);
+			pds.setMaxPoolSize(80);
+			pds.setMaxConnectionReuseTime(3600);
+			this.con=pds.getConnection();
+		} catch (SQLException e) {
 			System.out.println("오라클 호출 실패");
 			e.printStackTrace();
 		}

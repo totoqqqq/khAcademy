@@ -77,7 +77,7 @@ public class Noticeboard {
 		return time;
 	}
 	public boolean getNewChars() {
-		if(((System.currentTimeMillis()-this.writeDate.getTime())/1000)<86400)
+		if(((System.currentTimeMillis()-this.writeDate.getTime())/1000)<43200)
 			return true;
 		return false;
 	}
