@@ -12,15 +12,16 @@ public class Connect implements AutoCloseable{
 	private final String DBURL="jdbc:oracle:thin:@localhost:1521:xe",DBdriver="oracle.jdbc.driver.OracleDriver";
 	private Connection con;
 	private PreparedStatement ps;
+	private PoolDataSource pds;
 	Connect(){
 		try {//ups로 교체.
-			PoolDataSource pds=PoolDataSourceFactory.getPoolDataSource();
+			pds=PoolDataSourceFactory.getPoolDataSource();
 			pds.setConnectionFactoryClassName(DBdriver);
 			pds.setURL(DBURL);
 			pds.setUser(ID);
 			pds.setPassword(PW);
-			pds.setInitialPoolSize(10);
-			pds.setMinPoolSize(10);
+			pds.setInitialPoolSize(1);
+			pds.setMinPoolSize(1);
 			pds.setMaxPoolSize(80);
 			pds.setMaxConnectionReuseTime(3600);
 			this.con=pds.getConnection();
@@ -42,6 +43,6 @@ public class Connect implements AutoCloseable{
 	@Override
 	public void close() throws Exception {
 		this.ps.close();
-		this.con.close();	
+		this.con.close();
 	}
 }
