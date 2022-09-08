@@ -8,7 +8,7 @@ public class NoticeboardDAO {
 	private static NoticeboardDAO nbDAO = null;
 	private NoticeboardDAO(){
 	}
-	public static NoticeboardDAO getInstance(){
+	public synchronized static NoticeboardDAO getInstance(){
 		if(nbDAO==null)
 			nbDAO=new NoticeboardDAO();
 		return nbDAO;

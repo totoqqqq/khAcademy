@@ -7,7 +7,7 @@ public class ClientDAO {
 	private static ClientDAO cliDAO=null;
 	private ClientDAO(){
 	}
-	public static ClientDAO getInstance(){
+	public synchronized static ClientDAO getInstance(){
 		if(cliDAO==null)
 			cliDAO=new ClientDAO();
 		return cliDAO;

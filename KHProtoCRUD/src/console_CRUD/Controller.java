@@ -6,7 +6,7 @@ public class Controller {
 	private static Controller cont=null;
 	private Controller() {	
 	}
-	public static Controller getInstance() {
+	public synchronized static Controller getInstance() {
 		if(cont==null)
 			cont=new Controller();
 		return cont;
