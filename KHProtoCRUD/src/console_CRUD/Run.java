@@ -10,6 +10,7 @@ public class Run {
 		Scanner scan = new Scanner(System.in);
 		String ID, PW="", checkPW="", ename; 
 		int phone; 
+		Controller cont = Controller.getInstance();
 		main:while(true) {
 			System.out.println("====================\n사설 BBS(컨셉)\n====================\n메뉴를 선택해주세요.\n1.전화걸기(연결)\n2.권한획득(가입)\n나머지.종료");
 			switch(scan.nextLine()) {
@@ -18,7 +19,7 @@ public class Run {
 				ID=scan.nextLine();
 				System.out.println("암호를 입력해주세요.");
 				PW=scan.nextLine();
-				Client clientLogin = new Controller().login(new Client(ID,PW));
+				Client clientLogin = cont.login(new Client(ID,PW));
 				if(clientLogin==null) {
 					System.out.println("ID, PW를 확인해주세요.");
 					continue;
@@ -36,7 +37,7 @@ public class Run {
 							title=scan.nextLine();
 							System.out.println("글 내용을 입력해주세요.");
 							content=scan.nextLine();
-							Noticeboard cCreateCheck =new Controller().createContent(new Noticeboard(title,content,clientLogin.getID()));
+							Noticeboard cCreateCheck =cont.createContent(new Noticeboard(title,content,clientLogin.getID()));
 							if(cCreateCheck==null)
 								System.out.println("게시글 작성에 실패했습니다.");
 							else
@@ -47,7 +48,7 @@ public class Run {
 							System.out.print("게시글 전체를 보시겠습니까?\n아니면 검색 할 키워드를 입력해주세요.(미입력시 전체조회) : ");
 							searchKey=scan.nextLine();
 							System.out.println("전체 게시글 목록\n글 번호\t | 제목\t\t | 작성자\t\t | 작성일\t");
-							ArrayList<Noticeboard> nbs = new Controller().readContent();
+							ArrayList<Noticeboard> nbs = cont.readContent();
 							if(nbs.size()==0)
 								System.out.println("BBS에 작성된 게시글이 없습니다.");
 							else {
@@ -86,7 +87,7 @@ public class Run {
 							break;
 						case "3":
 							System.out.println("전체 게시글 목록\n 글 번호\t | 제목\t\t | 작성자\t\t | 작성일\t");
-							ArrayList<Noticeboard> nbsu = new Controller().readContent();
+							ArrayList<Noticeboard> nbsu = cont.readContent();
 							if(nbsu.size()==0)
 								System.out.println("BBS에 검색된 게시글이 없습니다.");
 							else {
@@ -101,13 +102,13 @@ public class Run {
 								}catch(NumberFormatException e) {
 									break;
 								}
-								Noticeboard mbUp=new Controller().editSearchContent(selectNo,clientLogin);
+								Noticeboard mbUp=cont.editSearchContent(selectNo,clientLogin);
 								if(!(mbUp==null)) {
 									System.out.println("수정할 글 제목을 입력하세요.");
 									title=scan.nextLine();
 									System.out.println("수정할 내용을 입력하세요.");
 									content=scan.nextLine();
-									Noticeboard check=new Controller().updateNB(new Noticeboard(selectNo,title,content,mbUp.getID()));
+									Noticeboard check=cont.updateNB(new Noticeboard(selectNo,title,content,mbUp.getID()));
 									if(!(check==null))
 										System.out.println(title + "게시글을 수정완료 하셨습니다.");
 									else
@@ -118,7 +119,7 @@ public class Run {
 							break;
 						case "4":
 							System.out.println("전체 게시글 목록\n 글 번호\t | 제목\t\t | 작성자\t\t | 작성일\t");
-							ArrayList<Noticeboard> nbsd = new Controller().readContent();
+							ArrayList<Noticeboard> nbsd = cont.readContent();
 							if(nbsd.size()==0)
 								System.out.println("BBS에 검색된 게시글이 없습니다.");
 							else {
@@ -133,9 +134,9 @@ public class Run {
 								}catch(NumberFormatException e) {
 									break;
 								}
-								Noticeboard mbDe=new Controller().editSearchContent(selectNo,clientLogin);
+								Noticeboard mbDe=cont.editSearchContent(selectNo,clientLogin);
 								if(!(mbDe==null)) {
-									Noticeboard check=new Controller().deleteNB(new Noticeboard(selectNo,mbDe.getTitle(),mbDe.getContent(),mbDe.getID()));
+									Noticeboard check=cont.deleteNB(new Noticeboard(selectNo,mbDe.getTitle(),mbDe.getContent(),mbDe.getID()));
 									if(!(check==null))
 										System.out.println(mbDe.getTitle() + "게시글을 삭제완료 하셨습니다.");
 									else
@@ -162,7 +163,7 @@ public class Run {
 							}catch(NumberFormatException e) {
 								upPhone=clientLogin.getPhone();
 							}
-							Client check=new Controller().updateSign(new Client(clientLogin.getID(),upPW,upEname,upPhone,clientLogin.getLevels()));
+							Client check=cont.updateSign(new Client(clientLogin.getID(),upPW,upEname,upPhone,clientLogin.getLevels()));
 							if(!(check==null)) {
 								System.out.println(check.getNickname()+"님 정보가 변경 되었습니다.");
 								break BBS;
@@ -174,7 +175,7 @@ public class Run {
 							System.out.println("계정을 삭제하시겠습니까?(Y/N)-이외 선택시 N");
 							switch(scan.nextLine()) {
 							case "Y":
-								new Controller().deleteSign(clientLogin);
+								cont.deleteSign(clientLogin);
 								System.out.println(clientLogin.getNickname()+"님 그동안 감사했습니다. 회원 탈퇴 되었습니다.");
 								break BBS;
 							case "N":
@@ -188,7 +189,7 @@ public class Run {
 								String deleteKey;
 								System.out.println("삭제할 게시글 KeyWord(글 제목,ID)를 입력해주세요. 미입력시 전체 삭제");
 								deleteKey=scan.nextLine();
-								boolean checkDeAdmin=new Controller().deleteNBAd(deleteKey);
+								boolean checkDeAdmin=cont.deleteNBAd(deleteKey);
 								if(checkDeAdmin)
 									System.out.println(deleteKey+"가 포함된 게시물들이 일괄 삭제 되었습니다.");
 								else
@@ -223,7 +224,7 @@ public class Run {
 				ename=scan.nextLine();
 				System.out.println("휴대전화번호를 작성해주세요.");
 				phone=Integer.parseInt(scan.nextLine());
-				Client clientSignup = new Controller().signup(new Client(ID,PW,ename,phone,1));
+				Client clientSignup = cont.signup(new Client(ID,PW,ename,phone,1));
 				if(clientSignup==null)
 					System.out.println("회원 가입에 실패하였습니다. 정보와 휴대전화번호 중복을 확인해주세요.");
 				else

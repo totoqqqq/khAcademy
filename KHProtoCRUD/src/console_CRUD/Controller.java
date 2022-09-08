@@ -3,6 +3,12 @@ package console_CRUD;
 import java.util.ArrayList;
 
 public class Controller {
+	private static Controller cont=new Controller();
+	private Controller() {	
+	}
+	public static Controller getInstance() {
+		return cont;
+	}
 	Client login(Client cli) {
 		ClientDAO cliDAO = ClientDAO.getInstance();
 		return cliDAO.login(cli);
