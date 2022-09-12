@@ -9,7 +9,7 @@ package day018_client;
 //Stream = 객체 간 데이터를 주고 받는 통로.
 public class Run {
 	public static void main(String[] args) {
-//		new Client();
-		new TCPClient();
+		new Client();
+//		new TCPClient();
 	}
 }

@@ -30,7 +30,7 @@ public class Run {
 						String title,content;
 						System.out.println(clientLogin.getNickname()+"님 메뉴를 선택해주세요.\n1.새 글 작성 2.게시판 읽기 3.작성 글 수정 4. 작성 글 삭제 5. 본인 정보 수정 6. 회원 탈퇴 \n[메뉴 이외 선택하면 종료] ");
 						if(clientLogin.getLevels()==10)
-							System.out.println("[관리자 메누]\n101.게시글 삭제, 102. 회원 권한 수정/정지/해제");
+							System.out.println("[관리자 메뉴]\n101.게시글 삭제, 102. 회원 권한 수정/정지/해제");
 						switch(scan.nextLine()) {
 						case "1":
 							System.out.println("글 제목을 입력해주세요.");

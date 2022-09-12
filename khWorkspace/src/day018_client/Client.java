@@ -6,7 +6,7 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 
 class Client extends Thread{
-	final String HOSTIP= "192.168.150.13", TESTIP="192.168.150.9", PORT="25000";
+	final String HOSTIP= "192.168.150.13", TESTIP="192.168.150.32", PORT="25000";
 	Client(){
 		try {
 //			Socket client = new Socket(HOSTIP,Integer.parseInt(PORT));
