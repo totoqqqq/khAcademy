@@ -44,7 +44,7 @@ class Client{
 							while(true) {
 								if(inputMassage!=null&&!inputMassage.equals("")) {
 									if(inputMassage.equals("#true"))
-										System.out.println(sm.getSign_id()+"님 로그인에 성공하였습니다.(please ENTER)");
+										System.out.println(sm.getSign_id()+"님 로그인에 성공하였습니다.(Login success)");
 									else
 										System.out.println("로그인에 실패하였습니다.(please check ID&PW)");
 									inputMassage=br.readLine();
@@ -68,9 +68,9 @@ class Client{
 							while(true) {
 								if(inputMassage!=null&&!inputMassage.equals("")) {
 									if(inputMassage.equals("#true"))
-										System.out.println(suSm.getNickname()+"님 회원가입에 성공하였습니다.(please ENTER)");
+										System.out.println(suSm.getNickname()+"님 회원가입에 성공하였습니다.(please Login)");
 									else
-										System.out.println("회원가입에 실패하였습니다.(please ENTER)");
+										System.out.println("회원가입에 실패하였습니다.(please check ID,PW,etc...)");
 									inputMassage=br.readLine();
 									continue main;
 								}
